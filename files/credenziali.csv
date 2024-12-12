@@ -1,1 +1,3 @@
-user;pass;U;utente;standard;utente@mail.com;00000;via standard 19;1234567890
+admin;admin;A;ADMIN;ADMIN;admin@mail.com;11111;via amministrazione 921
+user;pass;U;utente;standard;utente@mail.com;00000;via standard 19
+utente;password;U;mario;rossi;mariorossi@mail.com;12345;via default 15

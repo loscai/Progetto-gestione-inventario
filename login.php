@@ -10,15 +10,18 @@
 <body>
 
     <?php
+    if (isset($_SESSION))
+        session_destroy();
+
     if (isset($_GET["messaggio"]))
-        echo $_GET["messaggio"]; 
+        echo $_GET["messaggio"];
     ?>
 
-    <form action="gestoreLogin.php" method="POST">
+    <form action="gestoreLogin.php" method="GET">
 
-        <h4>Username: </h4> <input type="text" name="username" required>
+        <h4>Username: </h4> <input type="text" name="username" value="utente" required>
         <br>
-        <h4>Password: </h4> <input type="password" name="password" required>
+        <h4>Password: </h4> <input type="password" name="password" value="password" required>
         <br>
 
         <input type="submit" value="INVIA">
