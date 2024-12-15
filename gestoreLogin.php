@@ -18,8 +18,11 @@ $password = $_GET["password"];
 //prendo il file con tutte le credenziali
 $contenutoFileCredenziali = file_get_contents("./files/credenziali.csv");
 
+
 //lo divido in righe
 $righeFileCredenziali = explode("\r\n", $contenutoFileCredenziali);
+
+print_r($righeFileCredenziali);
 
 foreach ($righeFileCredenziali as $riga) {
     //suddivido la riga nei campi che la compongono
@@ -27,6 +30,7 @@ foreach ($righeFileCredenziali as $riga) {
     //mi servono solo i primi due campi (username e password)
     //controllo le corrispondenze
     if ($username == $campi[0] && $password == $campi[1]) {
+        echo $username . " - " .$password;
         //se le credenziali corrispondono
         $_SESSION["ruolo"] = $campi[2];
         header("location: redirect.php?username=" . $campi[0]);

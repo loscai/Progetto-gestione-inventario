@@ -9,6 +9,7 @@ if(!isset($_SESSION["autenticato"])){
     exit;
 }
 
+print_r($_SESSION);
 //faccio i controlli sui dati inseriti
 
 //prendo il file con tutte le credenziali
@@ -20,29 +21,29 @@ $righeFileCredenziali = explode("\r\n",$contenutoFileCredenziali);
 foreach ($righeFileCredenziali as $riga) {
     //suddivido la riga nei campi che la compongono
     $campi = explode(";",$riga);
-    print_r($campi);
+    //print_r($campi);
     //controllo le corrispondenze
     if($_SESSION["autenticato"] == $campi[2] ){
         //i ruoli corrispondono, quindi mi muovo nella pagina dedicata
-        if($campi[2] == "A"){
-            //header("location: paginaAdmin.php");
-            //exit;
+        if($_SESSION["username"] == "admin"){
+            header("location: paginaAdmin.php");
+            exit;
         }
-        else if($campi[2] == "U" && $campi[0] == $_SESSION["username"]){
+        else if($campi[0] == $_SESSION["username"]){
             $path = "./pagineUtenti/".$campi[0].".php";
             if(!file_exists($path)){
                 fopen($path,"w");
                 file_put_contents($path,"require_once('./utilities/basePaginaUtente.php');");
             }
-                //header("location: ".$path);
-                //exit;
+                header("location: ".$path);
+                exit;
         }
     }
 }
 
 //se non entro mai nel controllo finisco qui, e no, non è un bene
-header("location: login.php?messaggio=Credenziali errate");
-exit;
+//header("location: login.php?messaggio=Credenziali errate");
+//exit;
 
 
 ?>
