@@ -32,7 +32,8 @@ foreach ($righeFileCredenziali as $riga) {
     if ($username == $campi[0] && $password == $campi[1]) {
         echo $username . " - " .$password;
         //se le credenziali corrispondono
-        $_SESSION["ruolo"] = $campi[2];
+        $_SESSION["autenticato"] = $campi[2];
+        $_SESSION["username"] = $campi[0];
         header("location: redirect.php?username=" . $campi[0]);
         exit;
     }

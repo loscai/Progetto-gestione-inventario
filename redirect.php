@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 }
 
 if(!isset($_SESSION["autenticato"])){
-    header("location: login.php?messaggio=Non hai i permessi per accedere a questa pagina");
+    header("location: login.php?messaggio= [REDIRECT] Non hai i permessi per accedere a questa pagina");
     exit;
 }
 
@@ -33,7 +33,7 @@ foreach ($righeFileCredenziali as $riga) {
             $path = "./pagineUtenti/".$campi[0].".php";
             if(!file_exists($path)){
                 fopen($path,"w");
-                file_put_contents($path,"require_once('./utilities/basePaginaUtente.php');");
+                file_put_contents($path,"<?php\r\n\r\nrequire_once('utilities\basePaginaUtente.php');\r\n");
             }
                 header("location: ".$path);
                 exit;
@@ -42,8 +42,8 @@ foreach ($righeFileCredenziali as $riga) {
 }
 
 //se non entro mai nel controllo finisco qui, e no, non è un bene
-//header("location: login.php?messaggio=Credenziali errate");
-//exit;
+header("location: login.php?messaggio=Credenziali errate");
+exit;
 
 
 ?>

@@ -16,9 +16,13 @@ if(!isset($_SESSION["autenticato"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CIAO</title>
 </head>
 <body>
+    <?php
     
+    echo "ciao " + $_SESSION["username"];
+    
+    ?>
 </body>
 </html>
