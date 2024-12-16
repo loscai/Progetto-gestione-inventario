@@ -39,7 +39,7 @@ foreach ($righeFileCredenziali as $riga) {
 }
 
 //se non entro mai nel controllo finisco qui, e no, non è un bene
-//header("location: login.php?messaggio=Credenziali errate");
-//exit;
+header("location: login.php?messaggio=Credenziali errate");
+exit;
 
 ?>
