@@ -17,7 +17,7 @@
         echo $_GET["messaggio"];
     ?>
 
-    <form action="gestoreLogin.php" method="GET">
+    <form action="gestoreLogin.php" method="POST">
 
         <h4>Username: </h4> <input type="text" name="username" value="utente" required>
         <br>

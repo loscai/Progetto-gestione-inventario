@@ -4,14 +4,14 @@ if (!isset($_SESSION))
     session_start();
 
 
-if (!isset($_GET["username"]) || !isset($_GET["password"])) {
+if (!isset($_POST["username"]) || !isset($_POST["password"])) {
     header("location: login.php?messaggio=Username o Password non inseriti");
     exit;
 }
 
 //se passa li salvo
-$username = $_GET["username"];
-$password = $_GET["password"];
+$username = $_POST["username"];
+$password = $_POST["password"];
 
 //faccio i controlli sui dati inseriti
 

@@ -21,7 +21,7 @@ if(!isset($_SESSION["autenticato"])){
 <body>
     <?php
     
-    echo "ciao " + $_SESSION["username"];
+    echo "ciao " . $_SESSION["username"];
     
     ?>
 </body>
