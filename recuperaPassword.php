@@ -44,8 +44,9 @@ try {
     $PHPMailer->Host = "smtp.gmail.com";
     $PHPMailer->Port = 587;
     $PHPMailer->Username = "ecommercesiteforthebest@gmail.com";
+    //questa è la password per app, un codice di 16 caratteri che ti permette di accedere all'account in casi tipo questo
+    //senza mettere la password effettiva, per maggiore sicurezza.
     $PHPMailer->Password = "bkuq hsqy vbgg ndvr";
-    //password della mail: Password123?
     $PHPMailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
     //Quarto passaggio: specificare il destinatario dell’e-mail
