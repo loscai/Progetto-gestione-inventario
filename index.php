@@ -6,7 +6,7 @@
     <title>FNFK</title>
 </head>
 <body>
-<h1>BENVENUTO NEL NOSTRO SITO DI ACQUISTI ALL'INGROSSO</h1>
+<h1>BENVENUTO A PIXELMARKET!</h1>
 
 
 <button onclick="window.location.href='login.php';">LOGIN</button>

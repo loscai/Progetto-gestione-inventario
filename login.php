@@ -25,9 +25,10 @@
         <br>
 
         <input type="submit" value="INVIA">
-        <button onclick="window.location.href='recuperaPassword.php';">RECUPERA PASSWORD</button>
 
     </form>
+    <button onclick="window.location.href='inputMail.php';">RECUPERA PASSWORD</button>
+
 </body>
 
 </html>
