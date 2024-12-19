@@ -89,7 +89,7 @@
         <br>
 
         <label for="CAP">CAP:</label>
-        <input type="text" id="CAP" name="CAP" placeholder="Il CAP deve contenere 5 numeri" required>
+        <input type="text" id="CAP" name="CAP" placeholder="Il CAP deve contenere 5 numeri" maxlength="5" required>
         <br>
 
         <label for="indirizzo">Indirizzo:</label>

@@ -1,9 +1,12 @@
 <?php
 
+require_once("C:\composer\vendor\autoload.php");
+
 $mail = "";
 if (isset($_POST["mail"])) {
     $mail = $_POST["mail"];
 }
+
 echo $mail . "<br>";
 $codice = "";
 for ($i = 0; $i < 6; $i++) {
