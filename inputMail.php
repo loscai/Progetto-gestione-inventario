@@ -9,6 +9,16 @@
 
 <body>
     <form action="recuperaPassword.php" method="POST">
+        <?php
+        
+        /*
+        MODIFICHE DA APPORTARE:
+
+        Aggiungere una pagina di controllo della mail, per verificare che sia all'interno del CSV
+        
+        */
+        
+        ?>
         e-mail per effettuare il recupero della password: <input type="email" name="mail" required><br>
         <button>INVIA</button>
 

@@ -1,4 +1,5 @@
 <?php
+
 $mail = "";
 if (isset($_POST["mail"])) {
     $mail = $_POST["mail"];
@@ -80,9 +81,12 @@ try {
 
 
     //inserisco l'input del codice, per verificare che sia corretto
+    //todo manda all'inizio al controllo con il name codiceInserito
 
+    $_SESSION["codiceGenerato"] = $codice;
     echo "<form action='' method='POST'>";
-    echo "<input type='number' maxlength='6' minlength='6' required><br>";
+    echo "Codice ricevuto per mail: ";
+    echo "<input type='number' maxlength='6' minlength='6'name='codiceInserito' required><br>";
     echo "<button>INVIA</button>";
     echo "</form>";
 
