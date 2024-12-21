@@ -33,7 +33,7 @@ foreach ($righeFileCredenziali as $riga) {
             $path = "./pagineUtenti/".$campi[0].".php";
             if(!file_exists($path)){
                 fopen($path,"w");
-                file_put_contents($path,"<?php\r\n\r\nrequire_once('utilities\basePaginaUtente.php');\r\n");
+                file_put_contents($path,"<?php\r\n\r\nrequire_once('utilities\basePaginaUtente.php');\r\n?>");
             }
                 header("location: ".$path);
                 exit;

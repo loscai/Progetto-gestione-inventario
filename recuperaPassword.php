@@ -82,7 +82,7 @@ try {
 
 
     //inserisco l'input del codice, per verificare che sia corretto
-    //todo manda all'inizio al controllo con il name codiceInserito
+    //TODO manda all'inizio al controllo con il name codiceInserito
 
     $_SESSION["codiceGenerato"] = $codice;
     echo "<form action='' method='POST'>";
