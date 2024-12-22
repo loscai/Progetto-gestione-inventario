@@ -18,10 +18,9 @@
     ?>
 
     <form action="gestoreLogin.php" method="POST">
-        <!-- RICORDA DI TOGLIERE I VALUE QUANDO HAI FINITO IL PROGETTO -->
-        <h4>Username: </h4> <input type="text" name="username" value="utente" required>
+        <h4>Username: </h4> <input type="text" name="username" required>
         <br>
-        <h4>Password: </h4> <input type="password" name="password" value="password" required>
+        <h4>Password: </h4> <input type="password" name="password" required>
         <br>
 
         <input type="submit" value="INVIA">
