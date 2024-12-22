@@ -37,7 +37,7 @@ function validaForm(event) {
     let indirizzo = document.getElementById('indirizzo').value;
 
     // Controllo validità username
-    if (username.trim() === '') {
+    if (username.trim() == '') {
         errorMessage += "L'username è obbligatorio.\n";
     }
 
@@ -57,7 +57,7 @@ function validaForm(event) {
     }
 
     // Controllo conferma password
-    if (password !== confermaPassword) {
+    if (password != confermaPassword) {
         errorMessage += "Le password non coincidono.\n";
     }
 
@@ -72,12 +72,12 @@ function validaForm(event) {
     }
 
     // Controllo indirizzo
-    if (indirizzo.trim() === '') {
+    if (indirizzo.trim() == '') {
         errorMessage += "L'indirizzo è obbligatorio.\n";
     }
 
     // Controllo ruolo
-    if (role.trim() === '') {
+    if (role.trim() == '') {
         errorMessage += "Il ruolo è obbligatorio.\n";
     }
 
