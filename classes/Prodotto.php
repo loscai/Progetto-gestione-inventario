@@ -56,7 +56,7 @@
             file_put_contents($filePath, $riga, FILE_APPEND);
         }
 
-        // Funzione per caricare utenti da file
+        // Funzione per caricare prodotti da file
         public static function caricaProdotti($filePath)
         {
             $contenuto = file_get_contents($filePath);
@@ -70,5 +70,33 @@
             }
             return $prodotti;
         }
+
+        public function cercaProdotti($prodotti, $searchTerm)
+        {
+            $prodottiFiltrati = [];
+            foreach ($prodotti as $prodotto) {
+                if (stripos($prodotto->getNome(), $searchTerm) !== false) {
+                    $prodottiFiltrati[] = $prodotto;
+                }
+            }
+            return $prodottiFiltrati;
+        }
+
+        public function ordinaProdotti($prodotti)
+        {
+            // Ordinamento manuale dei prodotti per nome
+            for ($i = 0; $i < count($prodotti) - 1; $i++) {
+                for ($j = 0; $j < count($prodotti) - 1 - $i; $j++) {
+                    if (strcmp($prodotti[$j]->getNome(), $prodotti[$j + 1]->getNome()) > 0) {
+                        // Scambia i prodotti
+                        $temp = $prodotti[$j];
+                        $prodotti[$j] = $prodotti[$j + 1];
+                        $prodotti[$j + 1] = $temp;
+                    }
+                }
+            }
+            return $prodotti;
+        }
+
     }
 ?>
