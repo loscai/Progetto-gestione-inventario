@@ -10,7 +10,7 @@ if (!isset($_SESSION['autenticato'])) {
 }
 
 // Funzione per caricare i prodotti dal file CSV
-$prodotti = Prodotto::caricaProdotti("prodotti/datas/prodottiNelMagazzino.csv");
+$prodotti = Prodotto::caricaProdotti("..\prodotti\datas\prodotti.csv");
 
 // Gestione della ricerca
 $searchTerm = '';
