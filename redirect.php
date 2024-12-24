@@ -29,10 +29,10 @@ foreach ($righeFileCredenziali as $riga) {
             header("location: paginaAdmin.php");
             exit;
         } else if ($campi[0] == $_SESSION["username"]) {
-            $path = "./pagineUtenti/" . $campi[0] . ".php";
+            $path = "./pagineUtenti/" . $campi[0] . ".php"; 
             if (!file_exists($path)) {
                 fopen($path, "w");
-                file_put_contents($path, "<?php\r\n\r\nrequire_once('..\utilities\basePaginaUtente.php');\r\n\r\n\r\nrequire_once('..\HomePage.php');?>");
+                file_put_contents($path, "<?php\r\n\r\nrequire_once('..\utilities\basePaginaUtente.php');\r\n\r\n\r\nrequire_once('..\HomePage.php');\r\n\r\n?>");
             }
             header("location: " . $path);
             exit;

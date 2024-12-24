@@ -74,7 +74,7 @@
         public static function caricaProdotti($filePath)
         {
             $contenuto = file_get_contents($filePath);
-            $righe = explode("\r\n", trim($contenuto));
+            $righe = explode("\r\n", $contenuto);
             $prodotti = [];
             foreach ($righe as $riga) {
                 $campi = explode(";", $riga);
