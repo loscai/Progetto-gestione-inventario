@@ -1,33 +1,33 @@
 <?php
-require_once("classes/Prodotto.php");
-if (!isset($_SESSION))      
-    session_start();
+    require_once("classes/Prodotto.php");
 
-// Verifica se l'utente è autenticato
-//NON TOCCARE QUESTO CONTROLLO PORTA TROIA
-if (!isset($_SESSION['autenticato'])) {
-    header('Location: login.php');
-    exit();
-}
+    if (!isset($_SESSION))      
+        session_start();
 
-// Recupero del nome utente dalla sessione
-$username = $_SESSION['username'];
+    // Verifica se l'utente è autenticato
+    if (!isset($_SESSION['autenticato'])) {
+        header('Location: login.php');
+        exit();
+    }
+
+    // Recupero del nome utente dalla sessione
+    $username = $_SESSION['username'];
 
 
-// Funzione per caricare i prodotti dal file CSV
-$prodotti = Prodotto::caricaProdotti( "../prodotti/datas/prodotti.csv");
+    // Funzione per caricare i prodotti dal file CSV
+    $prodotti = Prodotto::caricaProdotti( "../prodotti/datas/prodotti.csv");
 
-// Gestione della ricerca
-$searchTerm = '';
-if (isset($_POST['search'])) {  
-    $searchTerm = $_POST['search'];
-    $prodotti = $prodottoIstanza->cercaProdotti($prodotti, $searchTerm);
-}
+    // Gestione della ricerca
+    $searchTerm = '';
+    if (isset($_POST['search'])) {  
+        $searchTerm = $_POST['search'];
+        $prodotti = Prodotto::cercaProdotti($prodotti, $searchTerm);
+    }
 
-// Ordinamento
-if (isset($_POST['sort'])) {
-    $prodotti = $prodottoIstanza->ordinaProdotti($prodotti);
-}
+    // Ordinamento
+    if (isset($_POST['sort'])) {
+        $prodotti = Prodotto::ordinaProdotti($prodotti);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ if (isset($_POST['sort'])) {
                     <p><?php echo $prodotto->getDescrizione(); ?></p>
                     <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
                     <p>Quantità: <?php echo $prodotto->getQuantita(); ?></p>
-                    <form action="DettagliProdotto.php" method="get">
+                    <form action="DettagliProdotto.php" method="GET">
                         <input type="hidden" name="IDprodotto" value="<?php echo $prodotto->getIDProdotto(); ?>">
                         <button type="submit">Dettagli</button>
                     </form>

@@ -85,7 +85,8 @@
             return $prodotti;
         }
 
-        public function cercaProdotti($prodotti, $searchTerm)
+        // Metodo statico per cercare prodotti
+        public static function cercaProdotti($prodotti, $searchTerm)
         {
             $prodottiFiltrati = [];
             foreach ($prodotti as $prodotto) {
@@ -96,13 +97,12 @@
             return $prodottiFiltrati;
         }
 
-        public function ordinaProdotti($prodotti)
+        // Metodo statico per ordinare prodotti
+        public static function ordinaProdotti($prodotti)
         {
-            // Ordinamento manuale dei prodotti per nome
             for ($i = 0; $i < count($prodotti) - 1; $i++) {
                 for ($j = 0; $j < count($prodotti) - 1 - $i; $j++) {
                     if (strcmp($prodotti[$j]->getNome(), $prodotti[$j + 1]->getNome()) > 0) {
-                        // Scambia i prodotti
                         $temp = $prodotti[$j];
                         $prodotti[$j] = $prodotti[$j + 1];
                         $prodotti[$j + 1] = $temp;
