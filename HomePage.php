@@ -44,7 +44,7 @@
 
     <h2>Prodotti disponibili</h2>
 
-    <form method="post">
+    <form method="POST">
         <input type="text" name="search" placeholder="Cerca un prodotto" value="<?php echo $searchTerm; ?>">
         <button type="submit">Cerca</button>
         <button type="submit" name="sort">Ordina per nome</button>

@@ -56,8 +56,6 @@
             <p><strong>Fornitore:</strong> <?php echo $prodottoSelezionato->getFornitore(); ?></p>
             <p><strong>Tipologia:</strong> <?php echo $prodottoSelezionato->getTipo(); ?></p>
         </div>
-
         <a href="HomePage.php">Torna alla Home Page</a>
-
     </body>
 </html>
