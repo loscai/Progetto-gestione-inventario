@@ -19,7 +19,7 @@ if (!isset($_GET['IDprodotto'])) {
 $IDprodotto = $_GET['IDprodotto'];
 
 // Carica tutti i prodotti dal file CSV
-$prodotti = Prodotto::caricaProdotti("./prodotti/datas/prodotti.csv");
+$prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
 
 // Cerca il prodotto corrispondente all'ID fornito
 $prodottoSelezionato = null;
@@ -38,27 +38,38 @@ if ($prodottoSelezionato === null) {
 
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dettagli Prodotto</title>
 </head>
-
 <body>
     <h1>Dettagli Prodotto</h1>
 
-        <div style="max-width: 50%;">
-            <img src="<?php echo $prodottoSelezionato->getPathImmagine(); ?>" alt="<?php echo $prodottoSelezionato->getNome(); ?>" 
-            style="max-width: 100%; max-height: 100%;">
-            <h2><?php echo $prodottoSelezionato->getNome(); ?></h2>
-            <p><strong>Descrizione:</strong> <?php echo $prodottoSelezionato->getDescrizione(); ?></p>
-            <p><strong>Quantità:</strong> <?php echo $prodottoSelezionato->getQuantita(); ?></p>
-            <p><strong>Fornitore:</strong> <?php echo $prodottoSelezionato->getFornitore(); ?></p>
-            <p><strong>Tipologia:</strong> <?php echo $prodottoSelezionato->getTipo(); ?></p>
-        </div>
+    <div style="max-width: 50%;">
+        <img src="<?php echo $prodottoSelezionato->getPathImmagine(); ?>" alt="<?php echo $prodottoSelezionato->getNome(); ?>" 
+        style="max-width: 100%; max-height: 100%;">
+        <h2><?php echo $prodottoSelezionato->getNome(); ?></h2>
+        <p><strong>Descrizione:</strong> <?php echo $prodottoSelezionato->getDescrizione(); ?></p>
+        <p><strong>Quantità disponibile:</strong> <?php echo $prodottoSelezionato->getQuantita(); ?></p>
+        <p><strong>Fornitore:</strong> <?php echo $prodottoSelezionato->getFornitore(); ?></p>
+        <p><strong>Tipologia:</strong> <?php echo $prodottoSelezionato->getTipo(); ?></p>
 
-        <a href="HomePage.php">Torna alla Home Page</a>
+        <form action="aggiungiCarrello.php" method="POST">
+            <label for="quantita">Quantità:</label>
+            <select name="quantita" id="quantita">
+                <?php
+                // Genera opzioni del menu a tendina in base alla quantità disponibile
+                for ($i = 1; $i <= $prodottoSelezionato->getQuantita(); $i++) {
+                    echo "<option value='$i'>$i</option>";
+                }
+                ?>
+            </select>
+            <input type="hidden" name="IDprodotto" value="<?php echo $prodottoSelezionato->getIDprodotto(); ?>">
+            <button type="submit">Aggiungi al Carrello</button>
+        </form>
+    </div>
 
-    </body>
+    <a href="HomePage.php">Torna alla Home Page</a>
+</body>
 </html>
