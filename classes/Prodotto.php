@@ -111,5 +111,26 @@
             }
             return $prodotti;
         }
+
+        public static function ottieniTipiUnici($prodotti)
+        {
+            $tipi = [];
+            foreach ($prodotti as $prodotto) {
+                $tipo = $prodotto->getTipo();
+                // Verifica se il tipo non è già stato aggiunto
+                $presente = false;
+                foreach ($tipi as $t) {
+                    if ($t === $tipo) {
+                        $presente = true;
+                        break;
+                    }
+                }
+                // Se il tipo non è presente, lo aggiungi all'array
+                if (!$presente) {
+                    $tipi[] = $tipo;
+                }
+            }
+            return $tipi;
+        }
     }
 ?>
