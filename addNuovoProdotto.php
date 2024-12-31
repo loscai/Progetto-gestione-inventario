@@ -1,14 +1,7 @@
 <?php
+require_once("./classes/Prodotto.php");
 
-/**
- * Immagine;
- * Nome;
- * Descrizione;
- * Fornitore;
- * Tipologia.
- */
-
-if (!isset($_SESSION))
+if(!isset($_SESSION))
     session_start();
 
 if (!isset($_SESSION["autenticato"]) || $_SESSION["autenticato"] != "A") {
@@ -17,10 +10,8 @@ if (!isset($_SESSION["autenticato"]) || $_SESSION["autenticato"] != "A") {
 }
 
 //mi assicuro che ci sia tutto
-if (count($_POST) == 4 && count($_FILES) == 1) {
-    //aggiungo il prodotto al CSV
-
-
+if (count($_POST) == 5 && count($_FILES) == 1) {
+    //aggiungo il prodotto al CSV   
     //prendo il contenuto del file prodotti
     $contenuto = file_get_contents("./prodotti/datas/prodotti.csv");
 
@@ -35,11 +26,43 @@ if (count($_POST) == 4 && count($_FILES) == 1) {
         $idAttuale += $id;
     }
 
-    $newID = $idAttuale + 1;
+    //devo processare l'immagine e ricavarne il path
+
+    $temp = $_FILES["immagine"]["tmp_name"];
+    $nuovoNome = "./prodotti/images/" . $_FILES["immagine"]["name"];
+
+    move_uploaded_file($temp, $nuovoNome);
+
+    $newIDProdotto = $idAttuale + 1;
     $nomeProdotto = $_POST["Nome"];
-    $tipologiaProdotto = $_POST["Descrizione"];
+    $descrizioneProdotto = $_POST["Descrizione"];
     $fornitoreProdotto = $_POST["Fornitore"];
+    $prezzoProdotto = $_POST["Prezzo"];
     $tipologiaProdotto = $_POST["Tipologia"];
+
+    $newProdotto = new Prodotto(
+        $newIDProdotto,
+        $nomeProdotto,
+        $descrizioneProdotto,
+        $fornitoreProdotto,
+        $prezzoProdotto,
+        $nuovoNome,
+        $tipologiaProdotto
+    );
+
+    $vettProdotto = [
+        $newIDProdotto,
+        $nomeProdotto,
+        $descrizioneProdotto,
+        $fornitoreProdotto,
+        $prezzoProdotto,
+        $nuovoNome,
+        $tipologiaProdotto
+    ];
+
+    print_r($vettProdotto);
+    
+    $newProdotto->salvaSuFile();
 }
 ?>
 
@@ -69,8 +92,8 @@ if (count($_POST) == 4 && count($_FILES) == 1) {
         Fornitore: <input type="text" name="Fornitore" required>
         <br><br>
 
-        Prezzo: <input type="number" name="Prezzo" required>
-
+        Prezzo: <input type="number" step="0.01" name="Prezzo" required>
+        <br><br>
         Tipologia prodotto: <input type="text" name="Tipologia" required>
         <br><br>
         <button>CREA</button>

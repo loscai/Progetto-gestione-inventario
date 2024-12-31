@@ -15,7 +15,7 @@
 
 
     // Funzione per caricare i prodotti dal file CSV
-    $prodotti = Prodotto::caricaProdotti( "prodotti/datas/prodotti.csv");
+    $prodotti = Prodotto::caricaProdotti( "../prodotti/datas/prodotti.csv");
 
     // Gestione della ricerca
     $searchTerm = '';
