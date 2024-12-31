@@ -1,27 +1,6 @@
 <?php
-class Prodotto
-{
-    private $IDprodotto;
-    private $Nome;
-    private $Descrizione;
-    private $Fornitore;
-    private $Prezzo;
-    private $pathImmagine;
-    private $tipo;
-    private $quantita;
-
-    public function __construct($IDprodotto, $Nome, $Descrizione, $Fornitore, $Prezzo, $pathImmagine, $tipo, $quantita = 1)
+    class Prodotto
     {
-<<<<<<< HEAD
-        $this->IDprodotto = $IDprodotto;
-        $this->Nome = $Nome;
-        $this->Descrizione = $Descrizione;
-        $this->Fornitore = $Fornitore;
-        $this->Prezzo = $Prezzo;
-        $this->pathImmagine = $pathImmagine;
-        $this->tipo = $tipo;
-        $this->quantita = $quantita;
-=======
         private $IDprodotto;
         private $Nome;
         private $Descrizione;
@@ -153,98 +132,5 @@ class Prodotto
             }
             return $tipi;
         }
->>>>>>> 9d20830df3c63a360e3cec3404437498efe79a34
     }
-
-    // Getter per tutti gli attributi
-    public function getIDprodotto()
-    {
-        return $this->IDprodotto;
-    }
-
-    public function getNome()
-    {
-        return $this->Nome;
-    }
-
-    public function getDescrizione()
-    {
-        return $this->Descrizione;
-    }
-
-    public function getFornitore()
-    {
-        return $this->Fornitore;
-    }
-
-    public function getPrezzo()
-    {
-        return $this->Prezzo;
-    }
-
-    public function getPathImmagine()
-    {
-        return $this->pathImmagine;
-    }
-
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    public function getQuantita()
-    {
-        return $this->quantita;
-    }
-
-    // Salva l'utente su file in formato CSV
-    public function salvaSuFile()
-    {
-        $riga = "\r\n" . $this->IDprodotto . ";" . $this->Nome . ";" . $this->Descrizione . ";" . $this->Fornitore . ";" . $this->Prezzo . ";" . $this->pathImmagine . ";" . $this->tipo . ";" . $this->quantita;
-        file_put_contents("./prodotti/datas/prodotti.csv", $riga, FILE_APPEND);
-    }
-
-    // Funzione per caricare prodotti da file
-    public static function caricaProdotti($filePath)
-    {
-        $contenuto = file_get_contents($filePath);
-        $righe = explode("\r\n", $contenuto);
-        $prodotti = [];
-        foreach ($righe as $riga) {
-            $campi = explode(";", $riga);
-            if (count($campi) === 8) { // Aggiunto controllo per 8 campi                
-                if ($campi[0] != "0")
-                    $prodotti[] = new Prodotto($campi[0], $campi[1], $campi[2], $campi[3], $campi[4], $campi[5], $campi[6], $campi[7]);
-            }
-        }
-        return $prodotti;
-    }
-
-    // Metodo statico per cercare prodotti
-    public static function cercaProdotti($prodotti, $searchTerm)
-    {
-        $prodottiFiltrati = [];
-        foreach ($prodotti as $prodotto) {
-            if (stripos($prodotto->getNome(), $searchTerm) !== false) {
-                $prodottiFiltrati[] = $prodotto;
-            }
-        }
-        return $prodottiFiltrati;
-    }
-
-    // Metodo statico per ordinare prodotti
-    public static function ordinaProdotti($prodotti)
-    {
-        for ($i = 0; $i < count($prodotti) - 1; $i++) {
-            for ($j = 0; $j < count($prodotti) - 1 - $i; $j++) {
-                if (strcmp($prodotti[$j]->getNome(), $prodotti[$j + 1]->getNome()) > 0) {
-                    $temp = $prodotti[$j];
-                    $prodotti[$j] = $prodotti[$j + 1];
-                    $prodotti[$j + 1] = $temp;
-                }
-            }
-        }
-        return $prodotti;
-    }
-}
 ?>

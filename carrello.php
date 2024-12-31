@@ -1,13 +1,6 @@
 <?php
-if (!isset($_SESSION))
     session_start();
 
-<<<<<<< HEAD
-if (!isset($_SESSION['carrello']) || empty($_SESSION['carrello'])) {
-    echo "Il carrello è vuoto.";
-    exit();
-}
-=======
     if (!isset($_SESSION['homePageLink'])) {
         $_SESSION['homePageLink'] = "HomePage.php";
     }
@@ -55,18 +48,15 @@ if (!isset($_SESSION['carrello']) || empty($_SESSION['carrello'])) {
         echo "<br><a href='" . $_SESSION['homePageLink'] . "'>Torna alla Home Page</a>";
         exit();
     }
->>>>>>> 9d20830df3c63a360e3cec3404437498efe79a34
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrello</title>
 </head>
-
 <body>
     <h1>Carrello</h1>
 
@@ -81,17 +71,6 @@ if (!isset($_SESSION['carrello']) || empty($_SESSION['carrello'])) {
 
         <?php
         $totaleCarrello = 0;
-<<<<<<< HEAD
-        foreach ($_SESSION['carrello'] as $item) {
-            $totaleProdotto = $item['prezzo'] * $item['quantita'];
-            $totaleCarrello += $totaleProdotto;
-            echo "<tr>
-                        <td>" . $item['nome'] . "</td>
-                        <td>" . $item['quantita'] . "</td>
-                        <td>" . $item['prezzo'] . "</td>
-                        <td>" . $totaleProdotto . "</td>
-                    </tr>";
-=======
         foreach ($_SESSION['carrello'] as $index => $item) {
             $totaleProdotto = $item['prezzo'] * $item['quantita'];
             $totaleCarrello += $totaleProdotto;
@@ -115,7 +94,6 @@ if (!isset($_SESSION['carrello']) || empty($_SESSION['carrello'])) {
                         </form>
                     </td>
                 </tr>";
->>>>>>> 9d20830df3c63a360e3cec3404437498efe79a34
         }
         ?>
 
@@ -131,9 +109,4 @@ if (!isset($_SESSION['carrello']) || empty($_SESSION['carrello'])) {
     
     <a href="<?php echo $_SESSION['homePageLink']; ?>">Torna alla Home Page</a>
 </body>
-<<<<<<< HEAD
-
 </html>
-=======
-</html>
->>>>>>> 9d20830df3c63a360e3cec3404437498efe79a34

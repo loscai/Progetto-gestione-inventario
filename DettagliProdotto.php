@@ -1,39 +1,39 @@
 <?php
-require_once("classes/Prodotto.php");
+    require_once("classes/Prodotto.php");
 
-if (!isset($_SESSION))
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
 
-// Verifica se l'utente è autenticato
-if (!isset($_SESSION['autenticato'])) {
-    header('Location: login.php');
-    exit();
-}
-
-// Recupero dell'ID prodotto passato tramite GET
-if (!isset($_GET['IDprodotto'])) {
-    echo "ID prodotto non fornito.";
-    exit();
-}
-
-$IDprodotto = $_GET['IDprodotto'];
-
-// Carica tutti i prodotti dal file CSV
-$prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
-
-// Cerca il prodotto corrispondente all'ID fornito
-$prodottoSelezionato = null;
-foreach ($prodotti as $prodotto) {
-    if ($prodotto->getIDprodotto() == $IDprodotto) {
-        $prodottoSelezionato = $prodotto;
-        break;
+    // Verifica se l'utente è autenticato
+    if (!isset($_SESSION['autenticato'])) {
+        header('Location: login.php');
+        exit();
     }
-}
 
-if ($prodottoSelezionato === null) {
-    echo "Prodotto non trovato.";
-    exit();
-}
+    // Recupero dell'ID prodotto passato tramite GET
+    if (!isset($_GET['IDprodotto'])) {
+        echo "ID prodotto non fornito.";
+        exit();
+    }
+
+    $IDprodotto = $_GET['IDprodotto'];
+
+    // Carica tutti i prodotti dal file CSV
+    $prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
+
+    // Cerca il prodotto corrispondente all'ID fornito
+    $prodottoSelezionato = null;
+    foreach ($prodotti as $prodotto) {
+        if ($prodotto->getIDprodotto() == $IDprodotto) {
+            $prodottoSelezionato = $prodotto;
+            break;
+        }
+    }
+
+    if ($prodottoSelezionato === null) {
+        echo "Prodotto non trovato.";
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
