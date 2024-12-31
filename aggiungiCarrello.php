@@ -5,7 +5,7 @@
     // Verifica se l'utente ha selezionato una quantità e l'ID del prodotto
     if (isset($_POST['IDprodotto']) && isset($_POST['quantita'])) {
         $IDprodotto = $_POST['IDprodotto'];
-        $quantita = $_POST['quantita'];
+        $quantita = intval($_POST['quantita']); // Converte la quantità in intero
 
         // Carica i prodotti dal file CSV
         $prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
@@ -20,33 +20,48 @@
         }
 
         if ($prodottoSelezionato !== null) {
-            // Aggiunge il prodotto al carrello
-            if (!isset($_SESSION['carrello'])) {
-                $_SESSION['carrello'] = [];
-            }
+            $quantitaDisponibile = intval($prodottoSelezionato->getQuantita()); // Ottiene la quantità disponibile dal CSV
 
-            // Verifica se il prodotto è già presente nel carrello
-            $prodottoTrovato = false;
-            foreach ($_SESSION['carrello'] as $index => $item) {
-                if ($item['IDprodotto'] == $IDprodotto) {
-                    $_SESSION['carrello'][$index]['quantita'] += $quantita; // Aggiunge quantità se già presente
-                    $prodottoTrovato = true;
-                    break;
+            // Verifica che la quantità richiesta sia valida
+            if ($quantita > 0 && $quantita <= $quantitaDisponibile) {
+                // Aggiunge il prodotto al carrello
+                if (!isset($_SESSION['carrello'])) {
+                    $_SESSION['carrello'] = [];
                 }
-            }
 
-            if (!$prodottoTrovato) {
-                $_SESSION['carrello'][] = [
-                    'IDprodotto' => $IDprodotto,
-                    'quantita' => $quantita,
-                    'nome' => $prodottoSelezionato->getNome(),
-                    'prezzo' => $prodottoSelezionato->getPrezzo(),
-                ];
-            }
+                // Verifica se il prodotto è già presente nel carrello
+                $prodottoTrovato = false;
+                foreach ($_SESSION['carrello'] as $index => $item) {
+                    if ($item['IDprodotto'] == $IDprodotto) {
+                        $quantitaTotale = $_SESSION['carrello'][$index]['quantita'] + $quantita;
 
-            // Redirige alla pagina del carrello
-            header("Location: carrello.php");
-            exit();
+                        // Controlla che la quantità totale non superi quella disponibile
+                        if ($quantitaTotale <= $quantitaDisponibile) {
+                            $_SESSION['carrello'][$index]['quantita'] = $quantitaTotale; // Aggiunge quantità se già presente
+                            $prodottoTrovato = true;
+                        } else {
+                            echo "Errore: quantità richiesta superiore alla disponibilità.";
+                            exit();
+                        }
+                        break;
+                    }
+                }
+
+                if (!$prodottoTrovato) {
+                    $_SESSION['carrello'][] = [
+                        'IDprodotto' => $IDprodotto,
+                        'quantita' => $quantita,
+                        'nome' => $prodottoSelezionato->getNome(),
+                        'prezzo' => $prodottoSelezionato->getPrezzo(),
+                    ];
+                }
+
+                // Redirige alla pagina del carrello
+                header("Location: carrello.php");
+                exit();
+            } else {
+                echo "Errore: quantità non valida. Disponibile: $quantitaDisponibile.";
+            }
         } else {
             echo "Prodotto non trovato.";
         }
