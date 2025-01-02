@@ -26,7 +26,12 @@ foreach ($righeFileCredenziali as $riga) {
     if ($_SESSION["autenticato"] == $campi[2]) {
         //i ruoli corrispondono, quindi mi muovo nella pagina dedicata
         if ($_SESSION["username"] == "admin") {
-            header("location: paginaAdmin.php");
+            $path = "./pagineUtenti/" . $campi[0] . ".php"; 
+            if (!file_exists($path)) {
+                fopen($path, "w");
+                file_put_contents($path, "<?php\r\n\r\nrequire_once('..\utilities\basePaginaUtente.php');\r\n\r\n\r\nrequire_once('..\HomePageAdmin.php');\r\n\r\n?>");
+            }
+            header("location: " . $path);
             exit;
         } else if ($campi[0] == $_SESSION["username"]) {
             $path = "./pagineUtenti/" . $campi[0] . ".php"; 

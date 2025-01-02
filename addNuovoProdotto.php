@@ -46,7 +46,7 @@ if (count($_POST) == 5 && count($_FILES) == 1) {
         $descrizioneProdotto,
         $fornitoreProdotto,
         $prezzoProdotto,
-        $nuovoNome,
+        ".".$nuovoNome,
         $tipologiaProdotto
     );
 

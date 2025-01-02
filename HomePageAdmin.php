@@ -45,6 +45,11 @@ if (isset($_POST['sort'])) {
     $prodotti = Prodotto::ordinaProdotti($prodotti);
 }
 
+if(isset($_POST["add"])){
+    header("location: ../addNuovoProdotto.php");
+    exit;
+}
+
 // Recupera i tipi unici di prodotto
 $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
 ?>
@@ -68,7 +73,9 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
         <input type="text" name="search" placeholder="Cerca un prodotto" value="<?php echo $searchTerm; ?>">
         <button type="submit">Cerca</button>
         <button type="submit" name="sort">Ordina per nome</button>
+        <button type="submit" name="add">Aggiungi nuovo prodotto</button>
     </form>
+    
 
     <!-- Form per filtro per tipo di prodotto -->
     <form method="POST">
