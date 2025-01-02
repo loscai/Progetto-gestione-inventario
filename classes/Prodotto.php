@@ -10,7 +10,7 @@
         private $tipo;
         private $quantita;
 
-        public function __construct($IDprodotto, $Nome, $Descrizione, $Fornitore, $Prezzo, $pathImmagine, $tipo, $quantita)
+        public function __construct($IDprodotto, $Nome, $Descrizione, $Fornitore, $Prezzo, $pathImmagine, $tipo, $quantita = 1)
         {
             $this->IDprodotto = $IDprodotto;
             $this->Nome = $Nome;

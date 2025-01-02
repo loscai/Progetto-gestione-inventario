@@ -28,7 +28,7 @@ if (count($_POST) != 0) {
         <h3>Confermi di voler uscire dall'account?</h3>
         <input type="radio" name="conferma" value="si"> SI <br>
         <input type="radio" name="conferma" value="no"> NO <br>
-        <button>INVIA</button>
+        <button>CONFERMA</button>
     </form>
 </body>
 

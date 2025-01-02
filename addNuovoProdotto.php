@@ -1,7 +1,7 @@
 <?php
 require_once("./classes/Prodotto.php");
 
-if(!isset($_SESSION))
+if (!isset($_SESSION))
     session_start();
 
 if (!isset($_SESSION["autenticato"]) || $_SESSION["autenticato"] != "A") {
@@ -46,23 +46,18 @@ if (count($_POST) == 5 && count($_FILES) == 1) {
         $descrizioneProdotto,
         $fornitoreProdotto,
         $prezzoProdotto,
-        ".".$nuovoNome,
+        "." . $nuovoNome,
         $tipologiaProdotto
     );
 
-    $vettProdotto = [
-        $newIDProdotto,
-        $nomeProdotto,
-        $descrizioneProdotto,
-        $fornitoreProdotto,
-        $prezzoProdotto,
-        $nuovoNome,
-        $tipologiaProdotto
-    ];
+    print_r($_SESSION);
 
-    print_r($vettProdotto);
     
-    $newProdotto->salvaSuFile();
+
+    $newProdotto->salvaSuFile("./prodotti/datas/prodotti.csv");
+
+    header("location: ./pagineUtenti/".$_SESSION["username"].".php");
+    exit;
 }
 ?>
 
