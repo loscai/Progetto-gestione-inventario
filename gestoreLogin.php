@@ -33,6 +33,7 @@ foreach ($righeFileCredenziali as $riga) {
         echo $username . " - " .$password;
         //se le credenziali corrispondono
         $_SESSION["autenticato"] = $campi[2];
+        $_SESSION["password"] = $campi[1]; //mi serve per il pagamento perchè voglio usare la password per confermare l'identità e lo user
         $_SESSION["username"] = $campi[0];
         header("location: redirect.php?username=" . $campi[0]);
         exit;

@@ -15,7 +15,7 @@ $username = $_SESSION['username'];
 
 
 // Funzione per caricare i prodotti dal file CSV
-$prodotti = Prodotto::caricaProdotti("../prodotti/datas/prodotti.csv");
+$prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
 
 // Gestione della ricerca
 $searchTerm = '';
@@ -88,7 +88,7 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
     </form>
 
     <!-- Form per andare al carrello -->
-    <form action="../carrello.php" method="GET">
+    <form action="carrello.php" method="GET">
         <button type="submit">Vai al Carrello</button>
     </form>
 

@@ -104,8 +104,12 @@
         </tr>
     </table>
 
-    <form method="post" action="">
+    <form method="POST" action="">
         <button type="submit" name="pulisci">Pulisci Carrello</button>
+    </form>
+
+    <form method="GET" action="PagamentoCarta.php">
+        <button type="submit">Procedi al Pagamento</button>
     </form>
     
     <a href="<?php echo $_SESSION['homePageLink']; ?>">Torna alla Home Page</a>
