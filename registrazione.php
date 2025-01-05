@@ -82,46 +82,18 @@
     }
 
     // Gestione della registrazione
-    if (isset($_POST['submit'])) { // Verifica se il form è stato inviato
+    if (isset($_POST['username'], $_POST['password'], $_POST['confermaPassword'], $_POST['role'], $_POST['nome'], $_POST['cognome'], $_POST['mail'], $_POST['CAP'], $_POST['indirizzo'])) {
         // Inizializza tutte le variabili con i dati ricevuti dal form
-        $username = '';
-        $password = '';
-        $confermaPassword = '';
-        $role = '';
-        $nome = '';
-        $cognome = '';
-        $mail = '';
-        $CAP = '';
-        $indirizzo = '';
-
-        // Recupero dei dati dal form con verifica
-        if (isset($_POST['username'])) {
-            $username = $_POST['username'];
-        }
-        if (isset($_POST['password'])) {
-            $password = $_POST['password'];
-        }
-        if (isset($_POST['confermaPassword'])) {
-            $confermaPassword = $_POST['confermaPassword'];
-        }
-        if (isset($_POST['role'])) {
-            $role = $_POST['role'];
-        }
-        if (isset($_POST['nome'])) {
-            $nome = $_POST['nome'];
-        }
-        if (isset($_POST['cognome'])) {
-            $cognome = $_POST['cognome'];
-        }
-        if (isset($_POST['mail'])) {
-            $mail = $_POST['mail'];
-        }
-        if (isset($_POST['CAP'])) {
-            $CAP = $_POST['CAP'];
-        }
-        if (isset($_POST['indirizzo'])) {
-            $indirizzo = $_POST['indirizzo'];
-        }
+        // Recupero dei dati dal form con verifica di isset
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $confermaPassword = $_POST['confermaPassword'];
+        $role = $_POST['role'];
+        $nome =  $_POST['nome'];
+        $cognome = $_POST['cognome'];
+        $mail = $_POST['mail'];
+        $CAP =  $_POST['CAP'];
+        $indirizzo = $_POST['indirizzo'];
 
         // Preparazione dati per la validazione
         $data = [

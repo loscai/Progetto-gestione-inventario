@@ -56,8 +56,7 @@
         }
     }
 
-    // Gestione dell'invio del modulo di pagamento
-    if (isset($_POST['paga'])) {
+    if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
         $numeroCarta = $_POST['numero_carta'];
         $cvv = $_POST['cvv'];
         $scadenza = $_POST['scadenza'];

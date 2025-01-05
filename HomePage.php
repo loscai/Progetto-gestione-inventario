@@ -1,52 +1,52 @@
 <?php
-require_once("classes/Prodotto.php");
+    require_once("classes/Prodotto.php");
 
-if (!isset($_SESSION))
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
 
-// Verifica se l'utente è autenticato
-if (!isset($_SESSION['autenticato'])) {
-    header('Location: login.php');
-    exit();
-}
-
-// Recupero del nome utente dalla sessione
-$username = $_SESSION['username'];
-
-
-// Funzione per caricare i prodotti dal file CSV
-$prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
-
-// Gestione della ricerca
-$searchTerm = '';
-if (isset($_POST['search'])) {
-    $searchTerm = $_POST['search'];
-    $prodotti = Prodotto::cercaProdotti($prodotti, $searchTerm);
-}
-
-// Gestione del filtro per tipo di prodotto
-$tipoSelezionato = '';
-if (isset($_POST['filtra'])) {
-    $tipoSelezionato = $_POST['tipo'];
-    $prodottiFiltrati = [];  // Array per i prodotti filtrati
-
-    foreach ($prodotti as $prodotto) {
-        // Verifica se il tipo del prodotto corrisponde al tipo selezionato
-        if ($prodotto->getTipo() === $tipoSelezionato) {
-            $prodottiFiltrati[] = $prodotto;  // Aggiungi il prodotto filtrato all'array
-        }
+    // Verifica se l'utente è autenticato
+    if (!isset($_SESSION['autenticato'])) {
+        header('Location: login.php');
+        exit();
     }
 
-    $prodotti = $prodottiFiltrati;  // Aggiorna l'array di prodotti con quelli filtrati
-}
+    // Recupero del nome utente dalla sessione
+    $username = $_SESSION['username'];
 
-// Ordinamento
-if (isset($_POST['sort'])) {
-    $prodotti = Prodotto::ordinaProdotti($prodotti);
-}
 
-// Recupera i tipi unici di prodotto
-$tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
+    // Funzione per caricare i prodotti dal file CSV
+    $prodotti = Prodotto::caricaProdotti("prodotti/datas/prodotti.csv");
+
+    // Gestione della ricerca
+    $searchTerm = '';
+    if (isset($_POST['search'])) {
+        $searchTerm = $_POST['search'];
+        $prodotti = Prodotto::cercaProdotti($prodotti, $searchTerm);
+    }
+
+    // Gestione del filtro per tipo di prodotto
+    $tipoSelezionato = '';
+    if (isset($_POST['filtra'])) {
+        $tipoSelezionato = $_POST['tipo'];
+        $prodottiFiltrati = [];  // Array per i prodotti filtrati
+
+        foreach ($prodotti as $prodotto) {
+            // Verifica se il tipo del prodotto corrisponde al tipo selezionato
+            if ($prodotto->getTipo() === $tipoSelezionato) {
+                $prodottiFiltrati[] = $prodotto;  // Aggiungi il prodotto filtrato all'array
+            }
+        }
+
+        $prodotti = $prodottiFiltrati;  // Aggiorna l'array di prodotti con quelli filtrati
+    }
+
+    // Ordinamento
+    if (isset($_POST['sort'])) {
+        $prodotti = Prodotto::ordinaProdotti($prodotti);
+    }
+
+    // Recupera i tipi unici di prodotto
+    $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
 ?>
 
 <!DOCTYPE html>
