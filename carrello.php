@@ -41,7 +41,7 @@
 
     // Debug: Controllo del contenuto del carrello
     echo "<pre>";
-    print_r($_SESSION['carrello']);
+    //print_r($_SESSION['carrello']);
     echo "</pre>";
 
     if (!isset($_SESSION['carrello']) || count($_SESSION['carrello']) === 0) {

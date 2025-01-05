@@ -112,7 +112,7 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
                         <p><?php echo $prodotto->getDescrizione(); ?></p>
                         <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
                         <p>Quantità: <?php echo $prodotto->getQuantita(); ?></p>
-                        <form action="DettagliProdotto.php" method="GET">
+                        <form action="../DettagliProdotto.php" method="GET">
                             <input type="hidden" name="IDprodotto" value="<?php echo $prodotto->getIDProdotto(); ?>">
                             <button type="submit">Dettagli</button>
                         </form>
