@@ -63,6 +63,11 @@
             return $this->quantita;
         }
 
+        // Metodo setter per quantita
+        public function setQuantita($quantita) {
+            $this->quantita = $quantita;
+        }
+
         // Salva l'utente su file in formato CSV
         public function salvaSuFile($filePath)
         {
@@ -132,5 +137,6 @@
             }
             return $tipi;
         }
+        
     }
 ?>

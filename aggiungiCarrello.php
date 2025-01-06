@@ -53,6 +53,7 @@
                         'quantita' => $quantita,
                         'nome' => $prodottoSelezionato->getNome(),
                         'prezzo' => $prodottoSelezionato->getPrezzo(),
+                        'Descrizione' => $prodottoSelezionato->getDescrizione()
                     ];
                 }
 

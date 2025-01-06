@@ -105,7 +105,7 @@
             echo '</ul>';
         }
     ?>
-    <form method="post" action="" onsubmit="return validaForm()">
+    <form method="POST" action="Riepilogo.php" onsubmit="return validaForm()">
         <fieldset>
             <legend>Dati Utente</legend>
             <p><strong>Nome:</strong> <?php echo $utenteCorrente->getNome(); ?></p>
