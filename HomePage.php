@@ -45,6 +45,13 @@
         $prodotti = Prodotto::ordinaProdotti($prodotti);
     }
 
+    // Elimina filtri
+    if (isset($_POST['reset'])) {
+        $searchTerm = '';
+        $tipoSelezionato = '';
+        $prodotti = Prodotto::caricaProdotti("../prodotti/datas/prodotti.csv");
+    }
+
     // Recupera i tipi unici di prodotto
     $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
 ?>
@@ -87,9 +94,12 @@
         <button type="submit" name="filtra">Filtra</button>
     </form>
 
-    <!-- Form per andare al carrello -->
-    <form action="carrello.php" method="GET">
+    <form action="../carrello.php" method="GET">
         <button type="submit">Vai al Carrello</button>
+    </form>
+
+    <form method="POST">
+        <button type="submit" name="reset">Elimina filtri</button>
     </form>
 
     <div>
@@ -105,7 +115,7 @@
                         <p><?php echo $prodotto->getDescrizione(); ?></p>
                         <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
                         <p>Quantità: <?php echo $prodotto->getQuantita(); ?></p>
-                        <form action="../DettagliProdotto.php" method="GET">
+                        <form action="DettagliProdotto.php" method="GET">
                             <input type="hidden" name="IDprodotto" value="<?php echo $prodotto->getIDProdotto(); ?>">
                             <button type="submit">Dettagli</button>
                         </form>

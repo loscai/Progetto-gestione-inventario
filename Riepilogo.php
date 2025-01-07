@@ -55,17 +55,17 @@
         foreach ($carrello as $prodottoCarrello) {
             foreach ($prodotti as $prodottoMagazzino) {
                 if ($prodottoCarrello['IDprodotto'] === $prodottoMagazzino->getIDprodotto()) {
-                    // Usa il getter per ottenere la quantità
+                    // Uso il getter per ottenere la quantità
                     $nuovaQuantita = $prodottoMagazzino->getQuantita() - $prodottoCarrello['quantita'];
                     
-                    // Usa un setter per aggiornare la quantità (se disponibile)
+                    // Uso un setter per aggiornare la quantità (se disponibile)
                     $prodottoMagazzino->setQuantita(max(0, $nuovaQuantita));
                 }
             }
         }
 
         // Riscrive il CSV aggiornato
-        $csvContent = "IDprodotto;Nome;Descrizione;Fornitore;Prezzo;pathImmagine;tipo;quantita\n";
+        $csvContent = "";
 
         foreach ($prodotti as $prodotto) {
              $csvContent .= $prodotto->getIDprodotto() . ";";
