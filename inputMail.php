@@ -91,6 +91,9 @@
         
         */
 
+        if(isset($_GET["messaggio"]))
+            echo $_GET["messaggio"];
+
         ?>
         e-mail per effettuare il recupero della password: <input type="email" name="mail" required><br>
         <button>INVIA</button>

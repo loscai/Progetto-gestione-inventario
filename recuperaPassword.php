@@ -105,9 +105,42 @@
 
 <?php
 
+if (!isset($_SESSION))
+    session_start();
+
+
+if (isset($_SESSION["codiceGenerato"]) && isset($_POST["codiceInserito"])) {
+    if ($_SESSION["codiceGenerato"] === $_POST["codiceInserito"]) {
+        header("location: inserisciNuovaPassword.php");
+        exit;
+    } else {
+        unset($_SESSION["codiceGenerato"]);
+        unset($_POST["codiceInserito"]);
+        echo "Codice inserito sbagliato, ne è stato inviato un altro";
+    }
+
+}
+
 $mail = "";
 if (isset($_POST["mail"])) {
-    $mail = $_POST["mail"];
+    //controllo se la mail esiste nel csv, se si la assegno e vado avanti, altrimenti torno indietro
+
+    $credenzialiDiTutti = file_get_contents("./files/credenziali.csv");
+
+    $righe = explode("\r\n", $credenzialiDiTutti);
+
+    foreach ($righe as $riga) {
+        $campi = explode(";", $riga);
+        if (count($campi) == 8)
+            if (hash_equals($_POST["mail"], $campi[5]))
+                $mail = $_POST["mail"];
+
+    }
+    if ($mail == "") {
+        header("location: inputMail.php?messaggio=Mail non trovata");
+        exit;
+    }
+
 }
 
 $codice = "";
@@ -115,9 +148,6 @@ for ($i = 0; $i < 6; $i++) {
     $numeretto = random_int(0, 9);
     $codice = $codice . $numeretto;
 }
-
-//mi includo il PHPmailer
-//require_once("C:\composer\vendor\autoload.php");
 
 
 /*Classe per la gestione delle eccezioni e degli errori*/
@@ -187,6 +217,7 @@ try {
     //TODO manda all'inizio al controllo con il name codiceInserito
 
     $_SESSION["codiceGenerato"] = $codice;
+    $_SESSION["mail"] = $mail;
     echo "<form action='' method='POST'>";
     echo "Codice ricevuto per mail: ";
     echo "<input type='number' maxlength='6' minlength='6'name='codiceInserito' required><br>";
