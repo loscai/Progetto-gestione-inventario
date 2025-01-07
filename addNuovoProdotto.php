@@ -52,11 +52,11 @@ if (count($_POST) == 5 && count($_FILES) == 1) {
 
     print_r($_SESSION);
 
-    
+
 
     $newProdotto->salvaSuFile("./prodotti/datas/prodotti.csv");
 
-    header("location: ./pagineUtenti/".$_SESSION["username"].".php");
+    header("location: ./pagineUtenti/" . $_SESSION["username"] . ".php");
     exit;
 }
 ?>
@@ -72,6 +72,153 @@ if (count($_POST) == 5 && count($_FILES) == 1) {
 
 <body>
 
+    <style>
+        /* Stile generale della pagina */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Titolo della pagina */
+        h1 {
+            color: #87CEEB;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Form container */
+        form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Label styling */
+        label {
+            color: #87CEEB;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Input fields */
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #87CEEB;
+            border-radius: 5px;
+            background-color: #000000;
+            color: white;
+            font-size: 1.1em;
+            box-sizing: border-box;
+        }
+
+        /* Area di testo per la descrizione */
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Focus sugli input */
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+        }
+
+        /* Select styling */
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background-color: #000000;
+            color: white;
+        }
+
+        /* Stile per il pulsante */
+        button {
+            background-color: #87CEEB;
+            color: #000000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Stile per il messaggio di errore */
+        p[style*="color: red"] {
+            background-color: rgba(255, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid red;
+            margin: 10px 0;
+        }
+
+        /* Stile per il messaggio di successo */
+        p[style*="color: green"] {
+            background-color: rgba(0, 255, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid green;
+            margin: 10px 0;
+        }
+
+        /* Link styling */
+        a {
+            color: #87CEEB;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Placeholder styling */
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
     <form method="POST" enctype="multipart/form-data">
 
         Immagine prodotto: <input type="file" name="immagine" required>

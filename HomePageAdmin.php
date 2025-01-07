@@ -45,7 +45,7 @@ if (isset($_POST['sort'])) {
     $prodotti = Prodotto::ordinaProdotti($prodotti);
 }
 
-if(isset($_POST["add"])){
+if (isset($_POST["add"])) {
     header("location: ../addNuovoProdotto.php");
     exit;
 }
@@ -64,6 +64,148 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
 </head>
 
 <body>
+    <style>
+        /* Stile generale della pagina */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Header e titoli */
+        h1 {
+            color: #87CEEB;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        /* Contenitore dei controlli */
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Stile per i form */
+        form {
+            margin: 10px;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Stile per gli input */
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 2px solid #87CEEB;
+            border-radius: 5px;
+            background-color: #000000;
+            color: white;
+            font-size: 1em;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+        }
+
+        /* Stile per i pulsanti */
+        button {
+            background-color: #87CEEB;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Layout dei prodotti */
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Card del prodotto */
+        .product-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            /* Larghezza fissa per ogni card */
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Immagine del prodotto */
+        .product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Dettagli del prodotto */
+        .product-title {
+            color: #87CEEB;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .product-description {
+            color: #cccccc;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .product-price {
+            color: #ffffff;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .product-quantity {
+            color: #87CEEB;
+            margin: 10px 0;
+        }
+
+        /* Messaggio nessun prodotto */
+        .no-products {
+            text-align: center;
+            color: #87CEEB;
+            padding: 20px;
+            font-size: 1.2em;
+            width: 100%;
+        }
+    </style>
     <h1>Benvenuto, <?php echo $username; ?>!</h1>
 
     <h2>Prodotti disponibili</h2>
@@ -75,7 +217,7 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
         <button type="submit" name="sort">Ordina per nome</button>
         <button type="submit" name="add">Aggiungi nuovo prodotto</button>
     </form>
-    
+
 
     <!-- Form per filtro per tipo di prodotto -->
     <form method="POST">

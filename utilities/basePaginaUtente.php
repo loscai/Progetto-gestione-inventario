@@ -23,7 +23,6 @@ if (!isset($_SESSION["autenticato"])) {
 <body>
     <?php
 
-    echo "ciao " . $_SESSION["username"];
 
     ?>
 

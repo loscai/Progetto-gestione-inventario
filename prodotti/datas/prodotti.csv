@@ -1,7 +1,7 @@
 0;Nome;Descrizione;Fornitore;Prezzo;PathImmagine;Tipologia;Quantità
-1;Pokémon Mystery Dungeon: Esploratori del cielo;Dopo essersi diplomati alla Gilda di Wigglytuff, il giocatore esplora il Picco del Cielo, affronta Grimer e Muk, e con l'aiuto di Shaymin purifica la vetta, prima di tornare al villaggio volando.;Nintendo;35.00;https://upload.wikimedia.org/wikipedia/it/c/c6/MDESkyBoxart.jpeg;videogioco;4
+1;Pokémon Mystery Dungeon: Esploratori del cielo;Dopo essersi diplomati alla Gilda di Wigglytuff, il giocatore esplora il Picco del Cielo, affronta Grimer e Muk, e con l'aiuto di Shaymin purifica la vetta, prima di tornare al villaggio volando.;Nintendo;35.00;https://upload.wikimedia.org/wikipedia/it/c/c6/MDESkyBoxart.jpeg;videogioco;8
 2;Cianuro;Ottimo drink da gustare in compagnia di amici o famiglia;Montagna Gioele;10.00;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbv4qeQvGX0mdgjvq58sqvp87B0NCtrJIMYQ&s;oggetti;3
-3;Giovanotti;Descrizione;Giovanni;13.87;../prodotti/images/jovanotti.jpeg;Umano;1
+3;Giovanotti;Descrizione;Giovanni;13.87;../prodotti/images/jovanotti.jpeg;Umano;0
 4;Christiano Marrone;siuuuuu marrone;pespi;19.99;../prodotti/images/chris brown.jpeg;Umano Trafficato;1
 5;THASUP;miglior artista italiano;90d;9999999.99;../prodotti/images/sfondo-thasup.jpg;Baby monstar;1
 6;montagne;montagnesche;io;10;../prodotti/images/sfondo1_montagne.jpg;natura;1

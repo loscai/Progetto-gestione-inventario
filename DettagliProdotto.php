@@ -46,6 +46,149 @@ if ($prodottoSelezionato === null) {
 </head>
 
 <body>
+    <style>
+        /* Stile generale della pagina */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header e titoli */
+        h1,
+        h2 {
+            color: #87CEEB;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        /* Contenitore dei dettagli del prodotto */
+        div {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+            border: 1px solid #87CEEB;
+            text-align: center;
+        }
+
+        /* Immagine del prodotto */
+        img {
+            max-width: 100%;
+            max-height: 300px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        /* Form per aggiungere al carrello */
+        form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+            border: 1px solid #87CEEB;
+        }
+
+        /* Etichetta e input del form */
+        label {
+            color: #87CEEB;
+            font-size: 1em;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Select per la quantità */
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #87CEEB;
+            border-radius: 5px;
+            background-color: #000000;
+            color: white;
+            font-size: 1em;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        select:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+        }
+
+        /* Button styling */
+        button {
+            background-color: #87CEEB;
+            color: #000000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Link */
+        a {
+            display: inline-block;
+            color: #87CEEB;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            padding: 10px 15px;
+            border: 1px solid #87CEEB;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        a:hover {
+            color: #000000;
+            background-color: #87CEEB;
+            text-decoration: underline;
+        }
+
+        /* Responsività */
+        @media (max-width: 600px) {
+            div {
+                padding: 20px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            a {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
     <h1>Dettagli Prodotto</h1>
 
     <div style="max-width: 50%;">
@@ -97,7 +240,12 @@ if ($prodottoSelezionato === null) {
 
     </div>
 
-    <a href="HomePage.php">Torna alla Home Page</a>
+    <?php
+
+    echo "<a href='pagineUtenti/". $_SESSION["username"] .".php'>Torna alla Home Page</a>";
+             
+    
+    ?>
 </body>
 
 </html>
