@@ -1,63 +1,65 @@
 <?php
-    if(!isset($_SESSION))
+if (!isset($_SESSION))
     session_start();
 
-    if (!isset($_SESSION['homePageLink'])) {
-        $_SESSION['homePageLink'] = "HomePage.php";
-    }
+if (!isset($_SESSION['homePageLink'])) {
+    $_SESSION['homePageLink'] = "HomePage.php";
+}
 
-    // Gestione del pulsante "Pulisci Carrello"
-    if (isset($_POST['pulisci'])) {
-        unset($_SESSION['carrello']); // Svuota solo il carrello
-        header("Location: carrello.php"); // Ricarica la pagina
+// Gestione del pulsante "Pulisci Carrello"
+if (isset($_POST['pulisci'])) {
+    unset($_SESSION['carrello']); // Svuota solo il carrello
+    header("Location: carrello.php"); // Ricarica la pagina
+    exit();
+}
+
+// Gestione della cancellazione della quantità di un singolo prodotto
+if (isset($_POST['elimina'])) {
+    $indexToDelete = $_POST['index'];
+    $quantitaToDelete = $_POST['quantita']; // Quantità da eliminare
+
+    // Verifica che la quantità da eliminare non sia maggiore di quella presente
+    if ($quantitaToDelete > $_SESSION['carrello'][$indexToDelete]['quantita']) {
+        echo "La quantità da eliminare non può essere maggiore di quella presente nel carrello.";
         exit();
     }
 
-    // Gestione della cancellazione della quantità di un singolo prodotto
-    if (isset($_POST['elimina'])) {
-        $indexToDelete = $_POST['index'];
-        $quantitaToDelete = $_POST['quantita']; // Quantità da eliminare
+    // Sottrarre la quantità dal carrello
+    $_SESSION['carrello'][$indexToDelete]['quantita'] -= $quantitaToDelete;
 
-        // Verifica che la quantità da eliminare non sia maggiore di quella presente
-        if ($quantitaToDelete > $_SESSION['carrello'][$indexToDelete]['quantita']) {
-            echo "La quantità da eliminare non può essere maggiore di quella presente nel carrello.";
-            exit();
-        }
-
-        // Sottrarre la quantità dal carrello
-        $_SESSION['carrello'][$indexToDelete]['quantita'] -= $quantitaToDelete;
-
-        // Se la quantità diventa 0, rimuovi completamente l'elemento dal carrello
-        if ($_SESSION['carrello'][$indexToDelete]['quantita'] == 0) {
-            unset($_SESSION['carrello'][$indexToDelete]);
-        }
-
-        // Riorganizza gli indici dell'array
-        $_SESSION['carrello'] = array_values($_SESSION['carrello']);
-        
-        header("Location: carrello.php"); // Ricarica la pagina
-        exit();
+    // Se la quantità diventa 0, rimuovi completamente l'elemento dal carrello
+    if ($_SESSION['carrello'][$indexToDelete]['quantita'] == 0) {
+        unset($_SESSION['carrello'][$indexToDelete]);
     }
 
-    // Debug: Controllo del contenuto del carrello
-    echo "<pre>";
-    //print_r($_SESSION['carrello']);
-    echo "</pre>";
+    // Riorganizza gli indici dell'array
+    $_SESSION['carrello'] = array_values($_SESSION['carrello']);
 
-    if (!isset($_SESSION['carrello']) || count($_SESSION['carrello']) === 0) {
-        echo "Il carrello è vuoto.";
-        echo "<br><a href='" . $_SESSION['homePageLink'] . "'>Torna alla Home Page</a>";
-        exit();
-    }
+    header("Location: carrello.php"); // Ricarica la pagina
+    exit();
+}
+
+// Debug: Controllo del contenuto del carrello
+echo "<pre>";
+//print_r($_SESSION['carrello']);
+echo "</pre>";
+
+if (!isset($_SESSION['carrello']) || count($_SESSION['carrello']) === 0) {
+    echo "Il carrello è vuoto.";
+    echo "<br><a href='" . $_SESSION['homePageLink'] . "'>Torna alla Home Page</a>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrello</title>
 </head>
+
 <body>
     <h1>Carrello</h1>
 
@@ -84,12 +86,12 @@
                         <form method='post' action=''>
                             <input type='hidden' name='index' value='$index'>
                             <select name='quantita'>"; // Menu a tendina per la quantità
-                            
+        
             // Popola il menu a tendina con le quantità disponibili
             for ($i = 1; $i <= $item['quantita']; $i++) {
                 echo "<option value='$i'>$i</option>";
             }
-            
+
             echo "</select>
                             <button type='submit' name='elimina'>Cancella</button>
                         </form>
@@ -111,7 +113,8 @@
     <form method="GET" action="PagamentoCarta.php">
         <button type="submit">Procedi al Pagamento</button>
     </form>
-    
+
     <a href="<?php echo $_SESSION['homePageLink']; ?>">Torna alla Home Page</a>
 </body>
+
 </html>

@@ -1,5 +1,7 @@
 <?php
     require_once("classes/Prodotto.php");
+
+    
     session_start();
 
     // Verifica se l'utente ha selezionato una quantità e l'ID del prodotto
