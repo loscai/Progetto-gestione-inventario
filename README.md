@@ -49,6 +49,7 @@ Il progetto è organizzato in modo modulare per garantire una manutenzione sempl
 ## Requisiti
 - **Linguaggi e strumenti**: 
   - HTML, CSS, JavaScript, PHP
+  - IDE
 - **Configurazione ambiente**: 
   - Server web (Apache)
 
