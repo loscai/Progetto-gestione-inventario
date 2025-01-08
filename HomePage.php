@@ -66,7 +66,7 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
 </head>
 
 <body>
-    <style> 
+    <style>
         /* Stile generale della pagina */
         body {
             font-family: 'Arial', sans-serif;
@@ -250,20 +250,35 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
         if (!empty($prodotti)) {
             foreach ($prodotti as $prodotto) {
                 if ($prodotto->getIDProdotto() != 0) {
-                    ?>
-                    <div style="max-width: 20%;">
-                        <img src="<?php echo $prodotto->getPathImmagine(); ?>" alt="<?php echo $prodotto->getNome(); ?>"
-                            style="max-width: 50%; max-height: 50%;">
-                        <h3><?php echo $prodotto->getNome(); ?></h3>
-                        <p><?php echo $prodotto->getDescrizione(); ?></p>
-                        <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
-                        <p>Quantità: <?php echo $prodotto->getQuantita(); ?></p>
-                        <form action="../DettagliProdotto.php" method="GET">
-                            <input type="hidden" name="IDprodotto" value="<?php echo $prodotto->getIDProdotto(); ?>">
-                            <button type="submit">Dettagli</button>
-                        </form>
-                    </div>
-                    <?php
+                    if ($prodotto->getQuantita() == 0) {
+                        ?>
+                        <div style="max-width: 20%;">
+                            <img src="<?php echo $prodotto->getPathImmagine(); ?>" alt="<?php echo $prodotto->getNome(); ?>"
+                                style="max-width: 50%; max-height: 50%;">
+                            <h3><?php echo $prodotto->getNome(); ?></h3>
+                            <p><?php echo $prodotto->getDescrizione(); ?></p>
+                            <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
+                            <p style="color: red;">Esaurito</p>
+                        </div>
+                        <?php
+                    } else {
+
+
+                        ?>
+                        <div style="max-width: 20%;">
+                            <img src="<?php echo $prodotto->getPathImmagine(); ?>" alt="<?php echo $prodotto->getNome(); ?>"
+                                style="max-width: 50%; max-height: 50%;">
+                            <h3><?php echo $prodotto->getNome(); ?></h3>
+                            <p><?php echo $prodotto->getDescrizione(); ?></p>
+                            <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
+                            <p>Quantità: <?php echo $prodotto->getQuantita(); ?></p>
+                            <form action="../DettagliProdotto.php" method="GET">
+                                <input type="hidden" name="IDprodotto" value="<?php echo $prodotto->getIDProdotto(); ?>">
+                                <button type="submit">Dettagli</button>
+                            </form>
+                        </div>
+                        <?php
+                    }
                 }
             }
         } else {

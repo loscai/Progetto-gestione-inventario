@@ -240,6 +240,97 @@ if (!empty($carrello)) {
 
     echo "<a href='pagineUtenti/" . $_SESSION["username"] . ".php'>Torna alla Home Page</a>";
 
+    $utenti = file_get_contents("./files/credenziali.csv");
+
+    $righe = explode("\r\n", $utenti);
+
+    foreach ($righe as $riga) {
+        $campi = explode(";", $riga);
+
+        if (hash_equals($campi[0], $_SESSION["username"])) {
+            $mail = $campi[5];
+        }
+    }
+
+    if ($mail === null) {
+        header("location: login.php?messaggio=mail non esistente");
+    }
+    /*Classe per la gestione delle eccezioni e degli errori*/
+    require './mailer/PHPMailer.php';
+    /*Classe PHPMailer*/
+    require './mailer/Exception.php';
+    /*Classe SMTP, necessaria per stabilire la connessione con un server SMTP*/
+    require './mailer/SMTP.php';
+
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    //creo l'oggetto PHPmailer
+    
+    /*Quando si crea un oggetto PHPMailer, occorre passare il parametro "true" per attivare le eccezioni (messaggi in caso di errore)*/
+    try {
+        // Tentativo di creazione di una nuova istanza della classe PHPMailer, nel caso in cui siano attivate delle eccezioni
+        $PHPMailer = new PHPMailer(true);
+
+        //AUTENTICAZIONE CON SMTP
+    
+        $PHPMailer->isSMTP();
+        $PHPMailer->SMTPAuth = true;
+        // Dati personali
+        $PHPMailer->Host = "smtp.gmail.com";
+        $PHPMailer->Port = 587;
+        $PHPMailer->Username = "ecommercesiteforthebest@gmail.com";
+        //questa è la password per app, un codice di 16 caratteri che ti permette di accedere all'account in casi tipo questo
+        //senza mettere la password effettiva, per maggiore sicurezza.
+        $PHPMailer->Password = "bkuq hsqy vbgg ndvr";
+        $PHPMailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+
+        //Quarto passaggio: specificare il destinatario dell’e-mail
+    
+        // Mittente
+        $PHPMailer->setFrom('ecommercesiteforthebest@gmail.com', 'E-Commerce Shop');
+        // Destinatario, opzionalmente può essere specificato anche il nome
+        $PHPMailer->addAddress($mail);
+        // Copia
+        $PHPMailer->addCC('ecommercesiteforthebest@gmail.com');
+        // Copia nascosta
+        $PHPMailer->addBCC('ecommercesiteforthebest@gmail.com', 'nome');
+
+        //Quinto passaggio: aggiungere il contenuto del messaggio di posta
+    
+        $PHPMailer->isHTML(true);
+        // Oggetto
+        $PHPMailer->Subject = 'CONFERMA ORDINE';
+        // Contenuto HTML
+        $corpo = 'Salve, il suo ordine è stato confermato, il riepilogo:';
+        foreach ($carrello as $prodotto) {
+            $corpo .= '<li>';
+            $corpo .= '<strong>' . $prodotto['nome'] . '</strong> - ';
+            $corpo .= $prodotto['Descrizione'] . '<br>';
+            $corpo .= 'Quantità: ' . $prodotto['quantita'] . '<br>';
+            $corpo .= 'Prezzo: €' . number_format($prodotto['prezzo'], 2);
+            $corpo .= '</li>';
+        }
+        $PHPMailer->Body = $corpo;
+        //$PHPMailer->AltBody = 'Il testo come semplice elemento testuale';
+        // Aggiungere un allegato
+        //$PHPMailer->addAttachment("/home/user/Desktop/immagineesempio.png", "immagineesempio.png");
+    
+
+        //Sesto passaggio: utilizzare la corretta codifica dei caratteri
+        $PHPMailer->CharSet = 'UTF-8';
+        $PHPMailer->Encoding = 'base64';
+
+
+        //Settimo passaggio: inviare l’e-mail
+        $PHPMailer->send();
+
+    } catch (Exception $e) {
+        echo "Mailer Error: " . $e->getMessage();
+    }
+
+
     ?>
 </body>
 
