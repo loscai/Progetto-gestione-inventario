@@ -193,8 +193,14 @@ if ($prodottoSelezionato === null) {
 
     <div style="max-width: 50%;">
 
+    <?php
+    
+    $newPath = ltrim($prodottoSelezionato->getPathImmagine(),".");
+    
+    ?>
 
-        <img src="<?php echo $prodottoSelezionato->getPathImmagine(); ?>"
+
+        <img src="<?php echo ".".$newPath; ?>"
             alt="<?php echo $prodottoSelezionato->getNome(); ?>" style="max-width: 100%; max-height: 100%;">
         <h2><?php echo $prodottoSelezionato->getNome(); ?></h2>
         <p><strong>Descrizione:</strong> <?php echo $prodottoSelezionato->getDescrizione(); ?></p>
