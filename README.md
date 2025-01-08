@@ -12,7 +12,6 @@ Questo progetto consiste nello sviluppo di un sito web per la gestione di un e-c
 ---
 
 ## Suddivisione delle attività
-Il progetto è stato realizzato con un approccio collaborativo. Di seguito, la suddivisione delle parti:
 
 ### **Colombo**
 - **Autenticazione**:
