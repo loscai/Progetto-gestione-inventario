@@ -309,7 +309,7 @@ if (!empty($carrello)) {
             $corpo .= '<strong>' . $prodotto['nome'] . '</strong> - ';
             $corpo .= $prodotto['Descrizione'] . '<br>';
             $corpo .= 'Quantità: ' . $prodotto['quantita'] . '<br>';
-            $corpo .= 'Prezzo: €' . number_format($prodotto['prezzo'], 2);
+            $corpo .= 'Prezzo: €' . number_format($totale, 2);
             $corpo .= '</li>';
         }
         $PHPMailer->Body = $corpo;
