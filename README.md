@@ -32,6 +32,7 @@ Questo progetto consiste nello sviluppo di un sito web per la gestione di un e-c
 - **E-commerce**:
   - Pagamento con riepilogo finale
   - Dettagli prodotto (in comune con Colombo: Ramella si occupa della parte utente normale/pro)
+  - Carrello prodotti
 - **Sviluppo tecnico**:
   - Classe per la gestione dei prodotti
   - Controlli lato client tramite JavaScript
