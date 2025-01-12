@@ -257,7 +257,7 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
                                 style="max-width: 50%; max-height: 50%;">
                             <h3><?php echo $prodotto->getNome(); ?></h3>
                             <p><?php echo $prodotto->getDescrizione(); ?></p>
-                            <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
+                            <p>Prezzo: <?php echo number_format($prodotto->getPrezzo(), 2)?></p>
                             <p style="color: red;">Esaurito</p>
                         </div>
                         <?php
@@ -270,7 +270,7 @@ $tipiProdotto = Prodotto::ottieniTipiUnici($prodotti);
                                 style="max-width: 50%; max-height: 50%;">
                             <h3><?php echo $prodotto->getNome(); ?></h3>
                             <p><?php echo $prodotto->getDescrizione(); ?></p>
-                            <p>Prezzo: <?php echo $prodotto->getPrezzo(); ?></p>
+                            <p>Prezzo: <?php echo number_format($prodotto->getPrezzo(), 2);?></p>
                             <p>Quantità: <?php echo $prodotto->getQuantita(); ?></p>
                             <form action="../DettagliProdotto.php" method="GET">
                                 <input type="hidden" name="IDprodotto" value="<?php echo $prodotto->getIDProdotto(); ?>">

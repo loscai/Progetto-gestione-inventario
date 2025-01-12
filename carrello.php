@@ -201,18 +201,18 @@ echo "</pre>";
                 echo "<tr>
                     <td>" . $item['nome'] . "</td>
                     <td>" . intval($item['quantita']) . "</td>
-                    <td>" . $item['prezzo'] . " €</td>
-                    <td>" . $totaleProdotto . " €</td>
+                    <td>" . number_format($item['prezzo'], 2, ',', '.') . " €</td>
+                    <td>" . number_format($totaleProdotto, 2, ',', '.') . " €</td>
                     <td>
                         <form method='post' action=''>
                             <input type='hidden' name='index' value='$index'>
                             <select name='quantita'>"; // Menu a tendina per la quantità
-        
+                
                 // Popola il menu a tendina con le quantità disponibili
                 for ($i = 1; $i <= $item['quantita']; $i++) {
                     echo "<option value='$i'>$i</option>";
                 }
-
+            
                 echo "</select>
                             <button type='submit' name='elimina'>Cancella</button>
                         </form>
@@ -220,12 +220,11 @@ echo "</pre>";
                 </tr>";
             }
         }
+        echo "<tr>
+            <td colspan='3'><strong>Totale Carrello:</strong></td>
+            <td><strong>" . number_format($totaleCarrello, 2, ',', '.') . " €</strong></td>
+        </tr>";
         ?>
-
-        <tr>
-            <td colspan="3"><strong>Totale Carrello:</strong></td>
-            <td><strong><?php echo $totaleCarrello; ?> €</strong></td>
-        </tr>
     </table>
 
     <form method="POST" action="">
@@ -236,11 +235,7 @@ echo "</pre>";
         <button type="submit">Procedi al Pagamento</button>
     </form>
 
-    <?php
-
-    echo "<a href='pagineUtenti/" . $_SESSION["username"] . ".php'>Torna alla Home Page</a>";
-
-    ?>
+    <?php echo "<a href='pagineUtenti/" . $_SESSION["username"] . ".php'>Torna alla Home Page</a>"; ?>
 </body>
 
 </html>
