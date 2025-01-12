@@ -98,6 +98,10 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
 <body>
     <style>
         /* Stile generale della pagina */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #000000;
@@ -107,6 +111,7 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
 
         /* Titolo della pagina */
@@ -127,6 +132,8 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
             border: 1px solid #87CEEB;
+            overflow: hidden;
+            /* Impedisce il trabocco dei contenuti */
         }
 
         legend {
@@ -150,6 +157,8 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
             margin-top: 30px;
             box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
             border: 1px solid #87CEEB;
+            overflow: hidden;
+            /* Impedisce il trabocco dei contenuti */
         }
 
         /* Etichetta e input del form */
@@ -168,7 +177,6 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
             background-color: #000000;
             color: white;
             font-size: 1em;
-            box-sizing: border-box;
             margin-bottom: 15px;
         }
 
@@ -183,6 +191,7 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
             color: red;
             font-size: 1.1em;
             margin-bottom: 20px;
+            padding-left: 20px;
         }
 
         ul li {
