@@ -27,9 +27,13 @@ function validaForm() {
         errori.push("Il CVV deve contenere esattamente 3 cifre.");
     }
 
-    // Validazione data scadenza
-    if (scadenza && !/^(0[1-9]|1[0-2])\/\d{2}$/.test(scadenza)) {
-        errori.push("La data di scadenza deve essere nel formato MM/YY.");
+    // Validazione scadenza (data futura)
+    if (scadenza) {
+        let oggi = new Date();
+        let dataScadenza = new Date(scadenza + "-01"); // Aggiunge il giorno 1 per creare un oggetto Date
+        if (dataScadenza < oggi) {
+            errori.push("La data di scadenza deve essere futura.");
+        }
     }
 
     // Se ci sono errori, mostro un alert e blocco l'invio del modulo

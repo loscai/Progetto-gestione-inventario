@@ -1,88 +1,94 @@
 <?php
-require_once("classes/Utente.php");
+    require_once("classes/Utente.php");
 
-session_start();
+    session_start();
 
-// Percorso del file credenziali.csv
-$filePath = "files/credenziali.csv";
+    // Percorso del file credenziali.csv
+    $filePath = "files/credenziali.csv";
 
-// Caricamento degli utenti dal file CSV
-$utenti = Utente::caricaUtenti($filePath);
+    // Caricamento degli utenti dal file CSV
+    $utenti = Utente::caricaUtenti($filePath);
 
-$utenteCorrente = null;
-foreach ($utenti as $utente) {
-    if ($utente->getUsername() === $_SESSION['username'] && $utente->getPassword() === $_SESSION['password']) {
-        $utenteCorrente = $utente;
-        break;
-    }
-}
-
-if ($utenteCorrente === null) {
-    echo "Utente non trovato.";
-    exit();
-}
-
-// Funzione per calcolare la cifra di controllo usando il metodo di Luhn
-function calcolaCifraDiControlloLuhn($stringaNumerica)
-{
-    $somma = 0;
-
-    if (strlen($stringaNumerica) % 2 !== 0) {
-        $stringaNumerica = '0' . $stringaNumerica;
-    }
-
-    for ($i = 1; $i <= strlen($stringaNumerica); $i++) {
-        $cifraCorrente = intval(substr($stringaNumerica, $i - 1, 1));
-        $daSommare = 0;
-
-        if ($i % 2 === 0) {
-            $cifraRaddoppiata = $cifraCorrente * 2;
-            if ($cifraRaddoppiata >= 10) {
-                $daSommare = 1 + ($cifraRaddoppiata % 10);
-            } else {
-                $daSommare = $cifraRaddoppiata;
-            }
-        } else {
-            $daSommare = $cifraCorrente;
+    $utenteCorrente = null;
+    foreach ($utenti as $utente) {
+        if ($utente->getUsername() === $_SESSION['username'] && $utente->getPassword() === $_SESSION['password']) {
+            $utenteCorrente = $utente;
+            break;
         }
-
-        $somma += $daSommare;
     }
 
-    if ($somma % 10 === 0) {
-        return 0;
-    } else {
-        return 10 - ($somma % 10);
-    }
-}
-
-if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
-    $numeroCarta = $_POST['numero_carta'];
-    $cvv = $_POST['cvv'];
-    $scadenza = $_POST['scadenza'];
-
-    // Validazione lato server
-    $errori = [];
-
-    if (empty($numeroCarta) || !preg_match('/^\d+$/', $numeroCarta) || strlen($numeroCarta) !== 16) {
-        $errori[] = "Il numero di carta deve contenere esattamente 16 cifre.";
-    } elseif (calcolaCifraDiControlloLuhn($numeroCarta) !== 0) {
-        $errori[] = "Il numero di carta non è valido.";
-    }
-
-    if (empty($cvv) || !preg_match('/^\d+$/', $cvv) || strlen($cvv) !== 3) {
-        $errori[] = "Il CVV deve contenere esattamente 3 cifre.";
-    }
-
-    if (empty($scadenza) || !preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $scadenza)) {
-        $errori[] = "La data di scadenza deve essere nel formato MM/YY.";
-    }
-
-    if (empty($errori)) {
-        echo "Pagamento effettuato con successo!";
+    if ($utenteCorrente === null) {
+        echo "Utente non trovato.";
         exit();
     }
-}
+
+    // Funzione per calcolare la cifra di controllo usando il metodo di Luhn
+    function calcolaCifraDiControlloLuhn($stringaNumerica)
+    {
+        $somma = 0;
+
+        if (strlen($stringaNumerica) % 2 !== 0) {
+            $stringaNumerica = '0' . $stringaNumerica;
+        }
+
+        for ($i = 1; $i <= strlen($stringaNumerica); $i++) {
+            $cifraCorrente = intval(substr($stringaNumerica, $i - 1, 1));
+            $daSommare = 0;
+
+            if ($i % 2 === 0) {
+                $cifraRaddoppiata = $cifraCorrente * 2;
+                if ($cifraRaddoppiata >= 10) {
+                    $daSommare = 1 + ($cifraRaddoppiata % 10);
+                } else {
+                    $daSommare = $cifraRaddoppiata;
+                }
+            } else {
+                $daSommare = $cifraCorrente;
+            }
+
+            $somma += $daSommare;
+        }
+
+        if ($somma % 10 === 0) {
+            return 0;
+        } else {
+            return 10 - ($somma % 10);
+        }
+    }
+
+    if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
+        $numeroCarta = $_POST['numero_carta'];
+        $cvv = $_POST['cvv'];
+        $scadenza = $_POST['scadenza'];
+
+        // Validazione lato server
+        $errori = [];
+
+        if (empty($numeroCarta) || !preg_match('/^\d+$/', $numeroCarta) || strlen($numeroCarta) !== 16) {
+            $errori[] = "Il numero di carta deve contenere esattamente 16 cifre.";
+        } elseif (calcolaCifraDiControlloLuhn($numeroCarta) !== 0) {
+            $errori[] = "Il numero di carta non è valido.";
+        }
+
+        if (empty($cvv) || !preg_match('/^\d+$/', $cvv) || strlen($cvv) !== 3) {
+            $errori[] = "Il CVV deve contenere esattamente 3 cifre.";
+        }
+
+        if (empty($scadenza)) {
+            $errori[] = "La data di scadenza è obbligatoria.";
+        } else {
+            $oggi = new DateTime();
+            $dataScadenza = DateTime::createFromFormat('Y-m', $scadenza);
+            if (!$dataScadenza || $dataScadenza < $oggi) {
+                $errori[] = "La data di scadenza deve essere futura.";
+            }
+        }
+
+        if (empty($errori)) {
+            echo "Pagamento effettuato con successo!";
+            exit();
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -262,7 +268,7 @@ if (isset($_POST['numero_carta'], $_POST['cvv'], $_POST['scadenza'])) {
             <input type="text" id="cvv" name="cvv" maxlength="3" required><br>
 
             <label for="scadenza">Scadenza (MM/YY):</label>
-            <input type="text" id="scadenza" name="scadenza" maxlength="5" required><br>
+            <input type="month" id="scadenza" name="scadenza" required>
         </fieldset>
 
         <button type="submit" name="paga">Paga</button>
