@@ -83,13 +83,6 @@
     <form action="recuperaPassword.php" method="POST">
         <?php
 
-        /*
-        TODO
-        MODIFICHE DA APPORTARE:
-
-        Aggiungere una pagina di controllo della mail, per verificare che sia all'interno del CSV
-        
-        */
 
         if(isset($_GET["messaggio"]))
             echo $_GET["messaggio"];
