@@ -11,7 +11,7 @@
 <style>/* Stile generale della pagina */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #000000;
+    background-color:rgb(0, 0, 0);
     color: #ffffff;
     margin: 0;
     padding: 20px;
